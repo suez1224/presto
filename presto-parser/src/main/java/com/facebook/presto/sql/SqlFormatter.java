@@ -99,6 +99,7 @@ import com.facebook.presto.sql.tree.SingleColumn;
 import com.facebook.presto.sql.tree.SqlParameterDeclaration;
 import com.facebook.presto.sql.tree.StartTransaction;
 import com.facebook.presto.sql.tree.Table;
+import com.facebook.presto.sql.tree.TableFunction;
 import com.facebook.presto.sql.tree.TableSubquery;
 import com.facebook.presto.sql.tree.TransactionAccessMode;
 import com.facebook.presto.sql.tree.TransactionMode;
@@ -377,6 +378,19 @@ public final class SqlFormatter
         {
             builder.append(formatName(node.getName()));
 
+            return null;
+        }
+
+        @Override
+        protected Void visitTableFunction(TableFunction node, Integer indent)
+        {
+            builder.append("TABLE(")
+                .append(node.getName())
+                .append("(")
+                .append(node.getExpressions().stream()
+                    .map(expression -> formatExpression(expression, parameters))
+                    .collect(joining(", ")))
+                .append("))");
             return null;
         }
 

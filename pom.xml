@@ -85,6 +85,7 @@
         <module>presto-spi</module>
         <module>presto-array</module>
         <module>presto-cache</module>
+        <module>presto-calcite</module>
         <module>presto-jmx</module>
         <module>presto-record-decoder</module>
         <module>presto-kafka</module>
