@@ -290,11 +290,12 @@ columnAliases
     ;
 
 relationPrimary
-    : qualifiedName                                                   #tableName
-    | '(' query ')'                                                   #subqueryRelation
-    | UNNEST '(' expression (',' expression)* ')' (WITH ORDINALITY)?  #unnest
-    | LATERAL '(' query ')'                                           #lateral
-    | '(' relation ')'                                                #parenthesizedRelation
+    : qualifiedName                                                     #tableName
+    | '(' query ')'                                                     #subqueryRelation
+    | UNNEST '(' expression (',' expression)* ')' (WITH ORDINALITY)?    #unnest
+    | LATERAL '(' query ')'                                             #lateral
+    | TABLE '(' qualifiedName '(' expression (',' expression)* ')' ')'  #tableFunction
+    | '(' relation ')'                                                  #parenthesizedRelation
     ;
 
 expression
